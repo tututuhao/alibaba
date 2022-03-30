@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import study.alibaba.dao.douyin.VideosMapper;
 import study.alibaba.entity.User;
+import study.alibaba.entity.douyin.Videos;
 import study.alibaba.feignClient.PlatformFeignClient;
 import study.alibaba.feignClient.PlatformFeignClient2;
 import study.alibaba.feignClient.PlatformFeignClient3;
@@ -38,9 +40,16 @@ public class TestController {
     @Autowired
     private PlatformFeignClient3 feignClient3;
 
+    @Autowired
+    private VideosMapper videosMapper;
+
     @GetMapping("/{id}")
-    public User getUserInfo(@PathVariable Long id){
-        return feignClient.getById(10L);
+    public List<Videos>  getUserInfo(@PathVariable Long id){
+        List<Videos> videos = videosMapper.selectAll();
+        Videos videos1 = new Videos();
+        videos1.setId("180510CCNC7C9FCH");
+        videosMapper.selectOne(videos1);
+        return videos;
     }
 
     @GetMapping("/create")

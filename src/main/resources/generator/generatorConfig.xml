@@ -22,15 +22,15 @@
         </jdbcConnection>
 
         <!--实体-->
-        <javaModelGenerator targetPackage="com.itmuch.contentcenter.domain.entity.${moduleName}"
+        <javaModelGenerator targetPackage="study.alibaba.entity.${moduleName}"
                             targetProject="src/main/java"/>
 
         <!--mapper.xml-->
-        <sqlMapGenerator targetPackage="com.itmuch.contentcenter.dao.${moduleName}"
+        <sqlMapGenerator targetPackage="study.alibaba.mapper.${moduleName}"
                          targetProject="src/main/resources"/>
 
         <!--mapper接口-->
-        <javaClientGenerator targetPackage="com.itmuch.contentcenter.dao.${moduleName}"
+        <javaClientGenerator targetPackage="study.alibaba.dao.${moduleName}"
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
