@@ -1,0 +1,13 @@
+server:
+  port: 9001
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        cluster-name: GD
+  application:
+    name: platform
+  main:
+    allow-bean-definition-overriding: true
+
