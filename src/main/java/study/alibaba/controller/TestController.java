@@ -1,9 +1,11 @@
 package study.alibaba.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.client.utils.JSONUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -42,6 +44,9 @@ public class TestController {
     @Autowired
     private VideosMapper videosMapper;
 
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
+
 //    @GetMapping("/{id}")
 //    public List<Videos>  getUserInfo(@PathVariable Long id){
 //        List<study.alibaba.douyin.entity.Videos> videos = videosMapper.selectList(null);
@@ -57,7 +62,12 @@ public class TestController {
     }
 
     @GetMapping("/3/{id}")
+    @SentinelResource
     public User getUserInfo2(@PathVariable Long id){
-        return feignClient.getById(10L);
+        User user = User.builder()
+                .id(12L)
+                .userName("test").build();
+        rocketMQTemplate.convertAndSend("test-user", user);
+        return user;
     }
 }

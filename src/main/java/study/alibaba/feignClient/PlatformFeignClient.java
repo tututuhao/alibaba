@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import study.alibaba.configuration.PlatformFeignConfigration;
 import study.alibaba.entity.User;
+import study.alibaba.feignClient.fallbackFactory.PlatformFeignClientFallbackFactory;
 
 /**
  * @author tuhao
@@ -14,7 +15,8 @@ import study.alibaba.entity.User;
  */
 @Component
 //@FeignClient(name = "platform", configuration = PlatformFeignConfigration.class)
-@FeignClient(name = "platform")
+@FeignClient(name = "platform", fallbackFactory = PlatformFeignClientFallbackFactory.class
+)
 public interface PlatformFeignClient {
 
     @GetMapping(value = "/{id}")
